@@ -28,7 +28,7 @@
         <h1>page d'accueil frais de déplacement</h1>
         <br>
         <h5 style="color: white;" th:if="${#authorization.expression('isAuthenticated()')}"
-            th:text="'Bonjour ' + ${#authentication.principal.fullName}"></h5>
+            th:text="'Bonjour' + ${#authentication.principal.fullName}"></h5>
         <br>
         <a th:if="${not #authorization.expression('isAuthenticated()')}" th:href="@{/login}"
             class="btn btn-success d-inline-block">Login</a>
