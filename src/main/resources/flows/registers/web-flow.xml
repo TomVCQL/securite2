@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- skeleton from spring-webflow-reference.pdf #3.5 -->
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+      <on-start>
+            <evaluate expression="numDossier.genNumDossier()" result="flowScope.numDossier"></evaluate>
+      </on-start>
+      <view-state id="preparation_declaration" view="declaration">
+            <transition on="boutonFraiTransport" to="frai_transport"></transition>
+      </view-state>
+
+      <view-state id="frai_transport" view="frai_transport">
+            <transition on="boutonFraiHebergement" to="frai_hebergement"></transition>
+      </view-state>
+      <view-state id="frai_hebergement" view="frai_hebergement">
+            <transition on="boutonFraiRestauration" to="frai_restauration"></transition>
+      </view-state>
+      <view-state id="frai_restauration" view="frai_restauration">
+            <transition on="boutonCoordonneBancaire" to="coordonne_bancaire"></transition>
+      </view-state>
+      <view-state id="coordonne_bancaire" view="coordonne_bancaire">
+            <transition on="boutonTransmettreDeclaration" to="transmettre_declaration"></transition>
+      </view-state>
+      <view-state id="transmettre_declaration" view="transmettre_declaration">
+            <transition on="boutonRecapitulatif" to="recapitulatif"></transition>
+      </view-state>
+      <view-state id="recapitulatif" view="recapitulatif">
+            
+      </view-state>
+</flow>

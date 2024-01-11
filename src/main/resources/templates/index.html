@@ -23,18 +23,17 @@
 </head>
 
 <body>
-
     <div class="text-center" style="background-color: #222;">
         <h1>page d'accueil frais de déplacement</h1>
-        <br>
+        <br/>
         <h5 style="color: white;" th:if="${#authorization.expression('isAuthenticated()')}"
-            th:text="'Bonjour' + ${#authentication.principal.fullName}"></h5>
+        th:text="'Bonjour ' + ${#authentication.principal.fullName}"></h5>
         <br>
         <a th:if="${not #authorization.expression('isAuthenticated()')}" th:href="@{/login}"
             class="btn btn-success d-inline-block">Login</a>
         <a th:href="@{/gestion}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="btn btn-primary d-inline-block">Gerer des
             déclarations</a>
-        <a th:href="@{/declaration}" th:if="${#authorization.expression('hasRole(''USER'')')}" class="btn btn-primary d-inline-block">Faire une
+        <a th:href="@{/registers}" th:if="${#authorization.expression('hasRole(''USER'')')}" class="btn btn-primary d-inline-block">Faire une
             déclaration</a>
         <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="post"
             class="d-inline-block">
