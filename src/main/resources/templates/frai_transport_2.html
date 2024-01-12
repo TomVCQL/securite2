@@ -121,7 +121,8 @@
                                 <span th:if="${moyenTransport}=='propreVehicule'" style="color: green;">Mon propre
                                     vehicule</span>
                             </div>
-                            <a th:href="@{${flowExecutionUrl}+'&_eventId=boutonFraiTransportRetour'}" class="btn btn-warning" style="color: white;margin-right: 4%;">Modifier ces
+                            <a th:href="@{${flowExecutionUrl}+'&_eventId=boutonFraiTransportRetour'}"
+                                class="btn btn-warning" style="color: white;margin-right: 4%;">Modifier ces
                                 informations</a>
                         </div>
                     </div>
@@ -158,11 +159,15 @@
                                     <label for="destination" class="form-label">Destination</label>
                                 </div>
                                 <br>
+                                <p class="alert alert-danger" style="text-align: left; margin-left: 1%;">
+                                    <span>&#9888;</span> Montant maximal : 300€
+                                </p>
                                 <div class="form-floating margin-form">
-                                    <input type="number" name="prixTransport" class="form-control" placeholder="prixTransport" required/>
+                                    <input type="number" name="prixTransport" id="prixTransport" class="form-control"
+                                        placeholder="prixTransport" max="300" required />
                                     <label for="prixTransport" class="form-label">Prix Essence</label>
                                 </div>
-                                <input type="submit" class="btn btn-success" value="Choisir"/>
+                                <input type="submit" class="btn btn-success" value="Choisir" />
                             </form>
                         </div>
                     </div>

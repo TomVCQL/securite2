@@ -99,3 +99,10 @@ body {
 .margin-form{
     margin: 1%;
 }
+
+.no-center {
+    text-align: left !important; /* Annule le centrage */
+    display: block; /* Évite que le texte prenne toute la largeur */
+    width: fit-content; /* Réduit la largeur au contenu */
+    margin: 0 auto; /* Centre le contenu horizontalement (si nécessaire) */
+}
