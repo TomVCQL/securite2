@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
-<script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de declaration de frais</title>
@@ -55,7 +55,7 @@
                                 <p class="h6 text-muted mb-0 mb-lg-0">Frais de transport</p>
                             </div>
                         </div>
-                        <div class="timeline-step check">
+                        <div class="timeline-step current">
                             <div class="timeline-content" data-toggle="popover" data-trigger="hover"
                                 data-placement="top" title=""
                                 data-content="And here's some amazing content. It's very engaging. Right?"
@@ -65,7 +65,7 @@
                                 <p class="h6 text-muted mb-0 mb-lg-0">Frais d'hébergement</p>
                             </div>
                         </div>
-                        <div class="timeline-step current">
+                        <div class="timeline-step next">
                             <div class="timeline-content" data-toggle="popover" data-trigger="hover"
                                 data-placement="top" title=""
                                 data-content="And here's some amazing content. It's very engaging. Right?"
@@ -75,7 +75,7 @@
                                 <p class="h6 text-muted mb-0 mb-lg-0">Frais de restauration</p>
                             </div>
                         </div>
-                        <div class="timeline-step next">
+                        <div class="timeline-step futur">
                             <div class="timeline-content" data-toggle="popover" data-trigger="hover"
                                 data-placement="top" title=""
                                 data-content="And here's some amazing content. It's very engaging. Right?"
@@ -110,34 +110,88 @@
             </div>
             <div class="container">
                 <div class="card-header ">
-                    <h3>Etape 4: Déclarer vos frais de restauration</h3>
+                    <h3>Etape 3: Déclarer vos frais d'hébergement</h3>
                     <hr>
-                    Avez-vous des frais de restauration?
-                    <div class="card" style="background-color: #f7f7f7;">
-                        <br>
-                        <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonFraiRestauration2'}" method="post">
-                            <div
-                                class="blue-container d-flex justify-content-start align-items-center text-center margin-form">
-                                <div class="blue-box">
-                                    <input type="radio" id="radioButton" name="typeRestauration" value="sans frais" checked>
-                                </div>
-                                <label for="radioButton" style="margin-left: 1%;">
-                                    <h4 class="text-start"><span>Aucun frais de restauration</span></h4>
-                                    Je n'ai aucun justificatif pour des frais de restauration
-                                </label>
+                    <div class="card">
+                        <h2>Votre mode d'hébergement</h2>
+                        <div class="d-flex justify-content-between align-items-center margin-form">
+                            <div>
+                                <b><span>Mode d'hébergement que vous déclarez</span></b><br>
+                                <span th:if="${typeHebergement}=='gratuit'" style="color: green;">J'ai bénéficié d'un
+                                    hébergement gratuit</span>
+                                <span th:if="${typeHebergement}=='derogation'" style="color: green;">J'ai bénéficié d'un
+                                    hébergement gratuit</span>
+                                <span th:if="${typeHebergement}=='payant'" style="color: green;">J'ai bénéficié d'un
+                                    hébergement payant</span>
                             </div>
-                            <div
-                                class="blue-container d-flex justify-content-start align-items-center text-center margin-form">
-                                <div class="blue-box">
-                                    <input type="radio" id="radioButton2" name="typeRestauration" value="avec frais">
-                                </div>
-                                <label for="radioButton2" style="margin-left: 1%;">
-                                    <h4 class="text-start"><span>Déclarer des frais de restauration</span></h4>
-                                    J'ai des frais de restauration à déclarer
-                                </label>
+                            <a th:href="@{${flowExecutionUrl}+'&_eventId=boutonFraiHebergementRetour'}"
+                                class="btn btn-warning" style="color: white;margin-right: 4%;">Modifier ces
+                                informations</a>
+                        </div>
+                    </div>
+                    <div th:if="${typeHebergement}=='payant'">
+                        <div class="card mt-4">
+                            <h4>Vos frais d'hébergement</h4>
+                            <hr>
+                            <div class="text-center p-3">
+                                <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonFraiRestauration'}"
+                                    method="post">
+                                    <div class="form-floating margin-form">
+                                        <input type="text" name="lieuHebergement" class="form-control"
+                                            placeholder="lieuHebergement" required />
+                                        <label for="lieuHebergement" class="form-label">lieu Hebergement</label>
+                                    </div>
+                                    <br>
+                                    <p class="alert alert-danger" style="text-align: left; margin-left: 1%;">
+                                        <span>&#9888;</span> Montant maximal : 300€
+                                    </p>
+                                    <div class="form-floating margin-form">
+                                        <input type="number" name="prixHebergement" id="prixTransport"
+                                            class="form-control" placeholder="prixHebergement" max="300" required />
+                                        <label for="prixHebergement" class="form-label">Prix Hebergement</label>
+                                    </div>
+                                    <div class="text-start margin-form">
+                                        <label for="justificatifHebergement" style="text-align: left;">Sélectionnez un
+                                            fichier:</label>
+                                    </div>
+                                    <div class="margin-form">
+                                        <input type="file" id="fileUpload" name="justificatifHebergement"
+                                            class="form-control" accept=".pdf, .jpg, .png" required>
+                                    </div>
+                                    <input type="submit" class="btn btn-success"
+                                        value="Valider les frais d'hébergement" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${typeHebergement}=='derogation'">
+                        <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonFraiRestauration'}" method="post">
+                            <div class="form-floating margin-form">
+                                <input type="hidden" name="lieuHebergement" class="form-control" value="domicile" />
+                            </div>
+                            <div class="form-floating margin-form">
+                                <input type="hidden" name="prixHebergement" id="prixTransport" class="form-control"
+                                    value="0" />
+                                <input type="hidden" name="justificatifHebergement" value="null">
                             </div>
                             <div class="text-center">
-                                <input type="submit" class="btn btn-success" value="Continuer"/>
+                                <input type="submit" class="btn btn-success" value="Valider les frais d'hébergement" />
+                            </div>
+
+                        </form>
+                    </div>
+                    <div th:if="${typeHebergement}=='gratuit'">
+                        <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonFraiRestauration'}" method="post">
+                            <div class="form-floating margin-form">
+                                <input type="hidden" name="lieuHebergement" class="form-control" value="lieu Gratuit" />
+                            </div>
+                            <div class="form-floating margin-form">
+                                <input type="hidden" name="prixHebergement" id="prixTransport" class="form-control"
+                                    value="0" />
+                                <input type="hidden" name="justificatifHebergement" value="null">
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-success" value="Valider les frais d'hébergement" />
                             </div>
                         </form>
                     </div>

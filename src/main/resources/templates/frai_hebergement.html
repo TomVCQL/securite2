@@ -2,98 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <style>
-        h1 {
-            color: white;
-        }
-
-        section {
-            background-color: #222;
-            text-align: center;
-        }
-
-        body {
-            margin-top: 20px;
-        }
-
-        .timeline-steps {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap
-        }
-
-        .timeline-steps .timeline-step {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            margin: 0.5rem
-        }
-
-        @media (min-width:768px) {
-            .timeline-steps .timeline-step:not(:last-child):after {
-                content: "";
-                display: block;
-                border-top: .25rem dotted #3b82f6;
-                width: 3.46rem;
-                position: absolute;
-                left: 7.5rem;
-                top: .3125rem
-            }
-
-            .timeline-steps .timeline-step:not(:first-child):before {
-                content: "";
-                display: block;
-                border-top: .25rem dotted #3b82f6;
-                width: 3.8125rem;
-                position: absolute;
-                right: 7.5rem;
-                top: .3125rem
-            }
-        }
-
-        .timeline-steps .timeline-content {
-            width: 10rem;
-            text-align: center
-        }
-
-        .timeline-steps .timeline-content .inner-circle {
-            border-radius: 1.5rem;
-            height: 1rem;
-            width: 1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #3b82f6
-        }
-
-        /* .timeline-steps .timeline-content .inner-circle:before {
-            content: "";
-            background-color: #3b82f6;
-            display: inline-block;
-            height: 3rem;
-            width: 3rem;
-            min-width: 3rem;
-            border-radius: 6.25rem;
-            opacity: .5
-        } */
-
-        .timeline-step.current .inner-circle {
-            background-color: red;
-        }
-
-        .timeline-step.check .inner-circle {
-            background-color: green;
-        }
-
-        .timeline-step.next .inner-circle {
-            background-color: #3b82f6;
-        }
-
-        .timeline-step.futur .inner-circle {
-            background-color: darkgray;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script th:src="@{/js/script.js}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de declaration de frais</title>
@@ -198,11 +108,52 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header">
-                <p th:text="${prixTransport}"></p>
-                <p th:text="${pointDepart}"></p>
-                <p th:text="${dateTransport}"></p>
-                <p th:text="${destination}"></p>
+            <div class="container">
+                <div class="card-header ">
+                    <h3>Etape 3: Déclarer vos frais d'hébergement</h3>
+                    <hr>
+                    Quel etait votre mode d'hébergement?
+                    <div class="card" style="background-color: #f7f7f7;">
+                        <br>
+                        <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonFraiHebergement2'}" method="post">
+                            <div
+                                class="blue-container d-flex justify-content-start align-items-center text-center margin-form">
+                                <div class="blue-box">
+                                    <input type="radio" id="radioButton" name="typeHebergement" value="derogation" checked>
+                                </div>
+                                <label for="radioButton" style="margin-left: 1%;">
+                                    <h4 class="text-start"><span>Dérogation du CE</span></h4>
+                                    J'ai obtenue une dérogation de mon chef d'etablissement pour rentrer chez moi le
+                                    soir
+                                </label>
+                            </div>
+                            <div
+                                class="blue-container d-flex justify-content-start align-items-center text-center margin-form">
+                                <div class="blue-box">
+                                    <input type="radio" id="radioButton2" name="typeHebergement" value="gratuit">
+                                </div>
+                                <label for="radioButton2" style="margin-left: 1%;">
+                                    <h4 class="text-start"><span>Hébergement Gratuit</span></h4>
+                                    Je n'ai eu aucune dérogation pour rentrer chez moi le soir ou je n'ai pas de
+                                    justificatif
+                                </label>
+                            </div>
+                            <div
+                                class="blue-container d-flex justify-content-start align-items-center text-center margin-form">
+                                <div class="blue-box">
+                                    <input type="radio" id="radioButton3" name="typeHebergement" value="payant">
+                                </div>
+                                <label for="radioButton3" style="margin-left: 1%;">
+                                    <h4 class="text-start"><span>Hébergement Payant</span></h4>
+                                    Je possède des justificatifs pour déclarer des frais d'hébergement
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-success"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

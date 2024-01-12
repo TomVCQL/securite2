@@ -100,9 +100,23 @@ body {
     margin: 1%;
 }
 
-.no-center {
-    text-align: left !important; /* Annule le centrage */
-    display: block; /* Évite que le texte prenne toute la largeur */
-    width: fit-content; /* Réduit la largeur au contenu */
-    margin: 0 auto; /* Centre le contenu horizontalement (si nécessaire) */
+.blue-container {
+    background-color: #337ab8ff; /* Couleur de fond du conteneur principal */
+    width: 55%;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre du conteneur */
 }
+
+.blue-box {
+    background-color: #337ab8ff; /* Couleur de fond du rectangle interne */
+    width: 20px; /* Ajustez la largeur du rectangle */
+    height: 70px; /* Ajustez la hauteur du rectangle */
+    border-radius: 5px; /* Coins arrondis du rectangle interne */
+    display: flex;
+    align-items: center;
+    box-shadow: 5px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+

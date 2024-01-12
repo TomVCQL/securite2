@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
-<script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de declaration de frais</title>
@@ -112,34 +112,54 @@
                 <div class="card-header ">
                     <h3>Etape 4: Déclarer vos frais de restauration</h3>
                     <hr>
-                    Avez-vous des frais de restauration?
-                    <div class="card" style="background-color: #f7f7f7;">
-                        <br>
-                        <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonFraiRestauration2'}" method="post">
-                            <div
-                                class="blue-container d-flex justify-content-start align-items-center text-center margin-form">
-                                <div class="blue-box">
-                                    <input type="radio" id="radioButton" name="typeRestauration" value="sans frais" checked>
-                                </div>
-                                <label for="radioButton" style="margin-left: 1%;">
-                                    <h4 class="text-start"><span>Aucun frais de restauration</span></h4>
-                                    Je n'ai aucun justificatif pour des frais de restauration
-                                </label>
+                    <div class="card">
+                        <h4>Votre selection</h4>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center margin-form">
+                            <div>
+                                <b><span>vous déclarez</span></b><br>
+                                <span th:if="${typeRestauration}=='sans frais'" style="color: green;">Ne pas avoir de
+                                    facture à fournir</span>
+                                <span th:if="${typeRestauration}=='avec frais'" style="color: green;">Avoir des justificatifs de frais de restauration</span>
                             </div>
-                            <div
-                                class="blue-container d-flex justify-content-start align-items-center text-center margin-form">
-                                <div class="blue-box">
-                                    <input type="radio" id="radioButton2" name="typeRestauration" value="avec frais">
-                                </div>
-                                <label for="radioButton2" style="margin-left: 1%;">
-                                    <h4 class="text-start"><span>Déclarer des frais de restauration</span></h4>
-                                    J'ai des frais de restauration à déclarer
-                                </label>
-                            </div>
+                            <a th:href="@{${flowExecutionUrl}+'&_eventId=boutonFraiRestaurationRetour'}"
+                                class="btn btn-warning" style="color: white;margin-right: 4%;">Modifier ces
+                                informations</a>
+                        </div>
+                    </div>
+                    <br>
+                    <div th:if="${typeRestauration}=='sans frais'">
+                        <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonCoordonneBancaire'}" method="post">
+                            <input type="hidden" name="justificatifRestauration" value="0" />
+                            <input type="hidden" name="prixRestauration" value="0" />
                             <div class="text-center">
-                                <input type="submit" class="btn btn-success" value="Continuer"/>
+                                <input type="submit" class="btn btn-success" value="Continuer ma déclaration" />
                             </div>
                         </form>
+                    </div>
+
+                    <div th:if="${typeRestauration}=='avec frais'">
+                        <div class="card">
+                            <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonCoordonneBancaire'}" method="post">
+                                <div class="text-center">
+                                    <p class="alert alert-danger" style="text-align: left; margin-left: 1%;">
+                                        <span>&#9888;</span> Montant maximal : 300€
+                                    </p>
+                                    <div class="form-floating margin-form">
+                                        <input type="number" name="prixRestauration" id="prixTransport" class="form-control"
+                                            placeholder="prixTransport" max="300" required />
+                                        <label for="prixTransport" class="form-label">Prix Restauration</label>
+                                    </div>
+                                    <div class="text-start margin-form">
+                                        <label for="justificatifHebergement" style="text-align: left;">Sélectionnez un fichier :</label>
+                                    </div>
+                                    <div class="margin-form">
+                                        <input type="file" id="fileUpload" name="justificatifRestauration" class="form-control" accept=".pdf, .jpg, .png" required>
+                                    </div>
+                                    <input type="submit" class="btn btn-success" value="Déclarer mes frais de restauration" />
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

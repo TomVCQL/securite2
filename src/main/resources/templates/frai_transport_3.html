@@ -133,7 +133,7 @@
                             <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonFraiHebergement'}" method="post">
                                 <div class="form-floating margin-form">
                                     <input type="text" name="pointDepart" class="form-control"
-                                        placeholder="lieu de depart" />
+                                        placeholder="lieu de depart" required/>
                                     <label for="pointDepart" class="form-label">Lieu de départ</label>
                                 </div>
                                 <br>
@@ -145,7 +145,7 @@
                                 <br>
                                 <div class="form-floating margin-form">
                                     <input type="text" name="destination" class="form-control"
-                                        placeholder="Destination" />
+                                        placeholder="Destination" required/>
                                     <label for="destination" class="form-label">Destination</label>
                                 </div>
                                 <br>

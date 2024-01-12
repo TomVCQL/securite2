@@ -117,7 +117,7 @@
                         <br>
                         <div class="custom-form">
                             <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonFraiTransport3'}" method="post">
-                                <input type="hidden" name="moyenTransport" value="grandeLigne"/>
+                                <input type="hidden" name="moyenTransport" value="grandeLigne" />
                                 <input type="submit" class="btn btn-primary" style="width: 400px;"
                                     value="Grandes lignes: Train, Avion, Ferry" />
                             </form>
@@ -125,7 +125,7 @@
                         <br>
                         <div class="custom-form">
                             <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonFraiTransport2'}" method="post">
-                                <input type="hidden" name="moyenTransport" value="propreVehicule"/>
+                                <input type="hidden" name="moyenTransport" value="propreVehicule" />
                                 <input type="submit" class="btn btn-primary" style="width: 400px;"
                                     value="Mon propre vehicule" />
                             </form>
@@ -133,6 +133,9 @@
                         <br>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
