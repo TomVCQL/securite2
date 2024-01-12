@@ -33,6 +33,7 @@
                   <set name="flowScope.moyenTransport"
                         value="flowRequestContext.getRequestParameters().moyenTransport"></set>
             </transition>
+            <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
       </view-state>
 
                         <!-- ****** -->
@@ -72,6 +73,7 @@
             <transition on="boutonFraiHebergement2" to="frai_hebergement2">
                   <set name="flowScope.typeHebergement" value="flowRequestContext.getRequestParameters().typeHebergement"></set>
             </transition>
+            <transition on="boutonRetourfraiTransport" to="frai_transport"></transition>
       </view-state>
 
                         <!-- ****** -->
@@ -92,11 +94,12 @@
                         <!-- ****** -->
                         <!-- PAGE 1 -->
                         <!-- ****** -->
-      <view-state id="frai_restauration" view="frai_restauration">
+      <view-state id="boutonRetourfraiRestauration" view="frai_restauration">
             <transition on="boutonCoordonneBancaire" to="coordonne_bancaire"></transition>
             <transition on="boutonFraiRestauration2" to="frai_restauration_2">
                   <set name="flowScope.typeRestauration" value="flowRequestContext.getRequestParameters().typeRestauration"></set>
             </transition>
+            <transition on="boutonRetourfraiHebergement" to="frai_hebergement"></transition>
       </view-state>
 
       <view-state id="frai_restauration_2" view="frai_restauration_2">
@@ -114,6 +117,7 @@
             <transition on="boutonTransmettreDeclaration" to="transmettre_declaration">
                   <set name="flowScope.iban" value="flowRequestContext.getRequestParameters().iban"></set>
             </transition>
+            <transition on="boutonRetourfraiRestauration" to="boutonRetourfraiRestauration"></transition>
       </view-state>
 
       <!-- *********************** -->

@@ -125,10 +125,17 @@
                                     <input type="submit" id="submitIban" class="btn btn-success" style="width: 400px;"
                                     value="Soumettre IBAN" />
                                 </div>
-
                             </form>
                         </div>
                         <br>
+                        <div class="custom-form">
+                            <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonRetourfraiRestauration'}" id="monForm" method="post">
+                                <div class="text-center">
+                                    <input type="submit" class="btn btn-warning" style="width: 400px; color: white;"
+                                    value="Revenir à l'etape précedente" />
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

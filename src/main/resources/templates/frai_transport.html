@@ -132,6 +132,15 @@
                         </div>
                         <br>
                     </div>
+                    <br>
+                    <div class="custom-form">
+                        <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonRetourPreparationDeclaration'}" id="monForm" method="post">
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-warning" style="width: 400px; color: white;"
+                                value="Revenir à l'etape précedente" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
