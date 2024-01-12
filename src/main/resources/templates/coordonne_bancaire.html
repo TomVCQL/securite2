@@ -115,7 +115,7 @@
                         <h4>IBAN</h4>
                         <br>
                         <div class="custom-form">
-                            <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonTransmettreDeclaration'}" method="post">
+                            <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonTransmettreDeclaration'}" id="monForm" method="post">
                                 <div class="form-floating margin-form">
                                     <input type="text" id="ibanId" name="iban" class="form-control" placeholder="iban" maxlength="27"/>
                                     <label for="iban" class="form-label">FRxx xxxx xxxx xxxx xxxx xxxx xxx</label>

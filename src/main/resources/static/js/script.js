@@ -15,17 +15,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-    
-    var iban = document.getElementById('ibanId');
-    var submitIban = document.getElementById('submitIban');
 
-    submitIban.disabled = true;
-        iban.addEventListener('input', function() {
-            if(iban.value.length == 27) {
-                submitIban.disabled = false;
-            }
-            else{
-                submitIban.disabled = true;
+    if(iban = document.getElementById('ibanId'))
+    {
+        var monFormulaire = document.getElementById('monForm');
+
+        monFormulaire.addEventListener('submit', function(event) {
+            if (iban.value.length !== 27) {
+                event.preventDefault();
+                alert("L'IBAN doit être rempli");
             }
         });
+    }
 });
