@@ -111,7 +111,9 @@
       <!-- COORDONNE BANCAIRE -->
       <!-- ****************** -->
       <view-state id="coordonne_bancaire" view="coordonne_bancaire">
-            <transition on="boutonTransmettreDeclaration" to="transmettre_declaration"></transition>
+            <transition on="boutonTransmettreDeclaration" to="transmettre_declaration">
+                  <set name="flowScope.iban" value="flowRequestContext.getRequestParameters().iban"></set>
+            </transition>
       </view-state>
 
       <!-- *********************** -->

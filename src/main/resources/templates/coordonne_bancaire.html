@@ -2,98 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <style>
-        h1 {
-            color: white;
-        }
-
-        section {
-            background-color: #222;
-            text-align: center;
-        }
-
-        body {
-            margin-top: 20px;
-        }
-
-        .timeline-steps {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap
-        }
-
-        .timeline-steps .timeline-step {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            margin: 0.5rem
-        }
-
-        @media (min-width:768px) {
-            .timeline-steps .timeline-step:not(:last-child):after {
-                content: "";
-                display: block;
-                border-top: .25rem dotted #3b82f6;
-                width: 3.46rem;
-                position: absolute;
-                left: 7.5rem;
-                top: .3125rem
-            }
-
-            .timeline-steps .timeline-step:not(:first-child):before {
-                content: "";
-                display: block;
-                border-top: .25rem dotted #3b82f6;
-                width: 3.8125rem;
-                position: absolute;
-                right: 7.5rem;
-                top: .3125rem
-            }
-        }
-
-        .timeline-steps .timeline-content {
-            width: 10rem;
-            text-align: center
-        }
-
-        .timeline-steps .timeline-content .inner-circle {
-            border-radius: 1.5rem;
-            height: 1rem;
-            width: 1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #3b82f6
-        }
-
-        /* .timeline-steps .timeline-content .inner-circle:before {
-            content: "";
-            background-color: #3b82f6;
-            display: inline-block;
-            height: 3rem;
-            width: 3rem;
-            min-width: 3rem;
-            border-radius: 6.25rem;
-            opacity: .5
-        } */
-
-        .timeline-step.current .inner-circle {
-            background-color: red;
-        }
-
-        .timeline-step.check .inner-circle {
-            background-color: green;
-        }
-
-        .timeline-step.next .inner-circle {
-            background-color: #3b82f6;
-        }
-
-        .timeline-step.futur .inner-circle {
-            background-color: darkgray;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script th:src="@{/js/script.js}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de declaration de frais</title>
@@ -198,9 +108,29 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header">
-                <a th:href="@{${flowExecutionUrl}+'&_eventId=boutonTransmettreDeclaration'}" type="button"
-                    class="btn btn" style="background-color: orange; color: white;margin-top: 40px;">Suivant</a>
+            <div class="container">
+                <div class="card-header ">
+                    <h3>Etape 5: Les Coordonnes bancaire</h3>
+                    <div class="card">
+                        <h4>IBAN</h4>
+                        <br>
+                        <div class="custom-form">
+                            <form th:action="@{${flowExecutionUrl}+'&_eventId=boutonTransmettreDeclaration'}" method="post">
+                                <div class="form-floating margin-form">
+                                    <input type="text" id="ibanId" name="iban" class="form-control" placeholder="iban" maxlength="27"/>
+                                    <label for="iban" class="form-label">FRxx xxxx xxxx xxxx xxxx xxxx xxx</label>
+                                </div>
+                                <br>
+                                <div class="text-center">
+                                    <input type="submit" id="submitIban" class="btn btn-success" style="width: 400px;"
+                                    value="Soumettre IBAN" />
+                                </div>
+
+                            </form>
+                        </div>
+                        <br>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
