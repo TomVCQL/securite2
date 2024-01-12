@@ -2,31 +2,93 @@
 <!-- skeleton from spring-webflow-reference.pdf #3.5 -->
 <flow xmlns="http://www.springframework.org/schema/webflow"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.springframework.org/schema/webflow
-                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
       <on-start>
             <evaluate expression="numDossier.genNumDossier()" result="flowScope.numDossier"></evaluate>
       </on-start>
+
+      <!-- *********************** -->
+      <!-- PREPARATION DECLARATION -->
+      <!-- *********************** -->
       <view-state id="preparation_declaration" view="declaration">
-            <transition on="boutonFraiTransport" to="frai_transport"></transition>
+            <transition on="boutonFraiTransport" to="frai_transport">
+                  <set name="flowScope.lieu_formation"
+                        value="flowRequestContext.getRequestParameters().lieu_formation"></set>
+            </transition>
       </view-state>
 
+      <!-- ****************** -->
+      <!-- FRAIS DE TRANSPORT -->
+      <!-- ****************** -->
+
+                        <!-- ****** -->
+                        <!-- PAGE 1 -->
+                        <!-- ****** -->
       <view-state id="frai_transport" view="frai_transport">
-            <transition on="boutonFraiHebergement" to="frai_hebergement"></transition>
+            <transition on="boutonFraiTransport2" to="frai_transport_2">
+                  <set name="flowScope.moyenTransport"
+                        value="flowRequestContext.getRequestParameters().moyenTransport"></set>
+            </transition>
+            <transition on="boutonFraiTransport3" to="frai_transport_3">
+                  <set name="flowScope.moyenTransport"
+                        value="flowRequestContext.getRequestParameters().moyenTransport"></set>
+            </transition>
       </view-state>
+
+                        <!-- ****** -->
+                        <!-- PAGE 2 -->
+                        <!-- ****** -->
+      <view-state id="frai_transport_2" view="frai_transport_2">
+            <transition on="boutonFraiHebergement" to="frai_hebergement">
+                  <set name="flowScope.dateTransport" value="flowRequestContext.getRequestParameters().date_transport"></set>
+                  <set name="flowScope.pointDepart" value="flowRequestContext.getRequestParameters().pointDepart"></set>
+                  <set name="flowScope.destination" value="flowRequestContext.getRequestParameters().destination"></set>
+                  <set name="flowScope.prixTransport" value="flowRequestContext.getRequestParameters().prixTransport"></set>
+            </transition>
+            <transition on="boutonFraiTransportRetour" to="frai_transport"></transition>
+      </view-state>
+
+                        <!-- ****** -->
+                        <!-- PAGE 3 -->
+                        <!-- ****** -->
+      <view-state id="frai_transport_3" view="frai_transport_3">
+            <transition on="boutonFraiHebergement" to="frai_hebergement">
+                  <set name="flowScope.dateTransport" value="flowRequestContext.getRequestParameters().date_transport"></set>
+                  <set name="flowScope.pointDepart" value="flowRequestContext.getRequestParameters().pointDepart"></set>
+                  <set name="flowScope.destination" value="flowRequestContext.getRequestParameters().destination"></set>
+                  <set name="flowScope.prixTransport" value="flowRequestContext.getRequestParameters().prixTransport"></set>
+            </transition>
+            <transition on="boutonFraiTransportRetour" to="frai_transport"></transition>
+      </view-state>
+
+      <!-- ******************* -->
+      <!-- FRAIS D'HEBERGEMENT -->
+      <!-- ******************* -->
       <view-state id="frai_hebergement" view="frai_hebergement">
             <transition on="boutonFraiRestauration" to="frai_restauration"></transition>
       </view-state>
+
+      <!-- ****************** -->
+      <!-- FRAIS RESTAURATION -->
+      <!-- ****************** -->
       <view-state id="frai_restauration" view="frai_restauration">
             <transition on="boutonCoordonneBancaire" to="coordonne_bancaire"></transition>
       </view-state>
+
+      <!-- ****************** -->
+      <!-- COORDONNE BANCAIRE -->
+      <!-- ****************** -->
       <view-state id="coordonne_bancaire" view="coordonne_bancaire">
             <transition on="boutonTransmettreDeclaration" to="transmettre_declaration"></transition>
       </view-state>
+
+      <!-- *********************** -->
+      <!-- TRANSMETTRE DECLARATION -->
+      <!-- *********************** -->
       <view-state id="transmettre_declaration" view="transmettre_declaration">
             <transition on="boutonRecapitulatif" to="recapitulatif"></transition>
       </view-state>
       <view-state id="recapitulatif" view="recapitulatif">
-            
+
       </view-state>
 </flow>
