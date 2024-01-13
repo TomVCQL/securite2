@@ -2,26 +2,71 @@ package fr.limayrac.securite2.model;
 
 import lombok.Data;
 
-import java.sql.Date;
-
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "declaration")
-public class declaration {
+public class Declaration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private Date date;
+    @Column(nullable = false, unique = true, length = 50)
+    private String numDossier;
+
+    @ManyToOne
+    @JoinColumn(name = "user", nullable = false, unique = true)
+    private User idUser;
 
     @Column(nullable = false, unique = true, length = 50)
-    private String lieu;
+    private String date_formation;
 
     @Column(nullable = false, unique = true, length = 50)
-    private String intitulé;
+    private String lieu_formation;
 
+    @Column(nullable = false, unique = true, length = 50)
+    private String intitule;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String moyenTransport;
+
+    @Column(nullable = false, unique = true,length = 50)
+    private String dateTransport;
     
+    @Column(nullable = false, unique = true, length = 50)
+    private String pointDepart;
+    
+    @Column(nullable = false, unique = true, length = 50)
+    private String destination;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String prixTransport;
+    
+    @Column(nullable = false, unique = true, length = 50)
+    private String typeHebergement;
+    
+    @Column(nullable = false, unique = true, length = 50)
+    private String lieuHebergement;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String prixHebergement;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String justificatifHebergement;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String typeRestauration;
+    
+    @Column(nullable = false, unique = true, length = 50)
+    private String justificatifRestauration;
+    
+    @Column(nullable = false, unique = true, length = 50)
+    private String prixRestauration;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String iban;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String statut;
 }

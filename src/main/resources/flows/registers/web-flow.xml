@@ -4,7 +4,7 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
       <on-start>
-            <evaluate expression="numDossier.genNumDossier()" result="flowScope.numDossier"></evaluate>
+            <evaluate expression="numDossier.genNumDossier()" result="flowScope.numeroDossier"/>
       </on-start>
 
       <!-- *********************** -->
@@ -14,6 +14,10 @@
             <transition on="boutonFraiTransport" to="frai_transport">
                   <set name="flowScope.lieu_formation"
                         value="flowRequestContext.getRequestParameters().lieu_formation"></set>
+                  <set name="flowScope.date_formation"
+                        value="flowRequestContext.getRequestParameters().date_formation"></set>
+                  <set name="flowScope.intitule"
+                        value="flowRequestContext.getRequestParameters().intitule"></set>
             </transition>
       </view-state>
 
@@ -21,9 +25,9 @@
       <!-- FRAIS DE TRANSPORT -->
       <!-- ****************** -->
 
-                        <!-- ****** -->
-                        <!-- PAGE 1 -->
-                        <!-- ****** -->
+      <!-- ****** -->
+      <!-- PAGE 1 -->
+      <!-- ****** -->
       <view-state id="frai_transport" view="frai_transport">
             <transition on="boutonFraiTransport2" to="frai_transport_2">
                   <set name="flowScope.moyenTransport"
@@ -36,28 +40,36 @@
             <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
       </view-state>
 
-                        <!-- ****** -->
-                        <!-- PAGE 2 -->
-                        <!-- ****** -->
+      <!-- ****** -->
+      <!-- PAGE 2 -->
+      <!-- ****** -->
       <view-state id="frai_transport_2" view="frai_transport_2">
             <transition on="boutonFraiHebergement" to="frai_hebergement">
-                  <set name="flowScope.dateTransport" value="flowRequestContext.getRequestParameters().date_transport"></set>
-                  <set name="flowScope.pointDepart" value="flowRequestContext.getRequestParameters().pointDepart"></set>
-                  <set name="flowScope.destination" value="flowRequestContext.getRequestParameters().destination"></set>
-                  <set name="flowScope.prixTransport" value="flowRequestContext.getRequestParameters().prixTransport"></set>
+                  <set name="flowScope.dateTransport"
+                        value="flowRequestContext.getRequestParameters().date_transport"></set>
+                  <set name="flowScope.pointDepart"
+                        value="flowRequestContext.getRequestParameters().pointDepart"></set>
+                  <set name="flowScope.destination"
+                        value="flowRequestContext.getRequestParameters().destination"></set>
+                  <set name="flowScope.prixTransport"
+                        value="flowRequestContext.getRequestParameters().prixTransport"></set>
             </transition>
             <transition on="boutonFraiTransportRetour" to="frai_transport"></transition>
       </view-state>
 
-                        <!-- ****** -->
-                        <!-- PAGE 3 -->
-                        <!-- ****** -->
+      <!-- ****** -->
+      <!-- PAGE 3 -->
+      <!-- ****** -->
       <view-state id="frai_transport_3" view="frai_transport_3">
             <transition on="boutonFraiHebergement" to="frai_hebergement">
-                  <set name="flowScope.dateTransport" value="flowRequestContext.getRequestParameters().date_transport"></set>
-                  <set name="flowScope.pointDepart" value="flowRequestContext.getRequestParameters().pointDepart"></set>
-                  <set name="flowScope.destination" value="flowRequestContext.getRequestParameters().destination"></set>
-                  <set name="flowScope.prixTransport" value="flowRequestContext.getRequestParameters().prixTransport"></set>
+                  <set name="flowScope.dateTransport"
+                        value="flowRequestContext.getRequestParameters().date_transport"></set>
+                  <set name="flowScope.pointDepart"
+                        value="flowRequestContext.getRequestParameters().pointDepart"></set>
+                  <set name="flowScope.destination"
+                        value="flowRequestContext.getRequestParameters().destination"></set>
+                  <set name="flowScope.prixTransport"
+                        value="flowRequestContext.getRequestParameters().prixTransport"></set>
             </transition>
             <transition on="boutonFraiTransportRetour" to="frai_transport"></transition>
       </view-state>
@@ -66,47 +78,57 @@
       <!-- FRAIS D'HEBERGEMENT -->
       <!-- ******************* -->
 
-                        <!-- ****** -->
-                        <!-- PAGE 1 -->
-                        <!-- ****** -->
+      <!-- ****** -->
+      <!-- PAGE 1 -->
+      <!-- ****** -->
       <view-state id="frai_hebergement" view="frai_hebergement">
             <transition on="boutonFraiHebergement2" to="frai_hebergement2">
-                  <set name="flowScope.typeHebergement" value="flowRequestContext.getRequestParameters().typeHebergement"></set>
+                  <set name="flowScope.typeHebergement"
+                        value="flowRequestContext.getRequestParameters().typeHebergement"></set>
             </transition>
             <transition on="boutonRetourfraiTransport" to="frai_transport"></transition>
       </view-state>
 
-                        <!-- ****** -->
-                        <!-- PAGE 2 -->
-                        <!-- ****** -->
+      <!-- ****** -->
+      <!-- PAGE 2 -->
+      <!-- ****** -->
       <view-state id="frai_hebergement2" view="frai_hebergement_2">
             <transition on="boutonFraiHebergementRetour" to="frai_hebergement"></transition>
             <transition on="boutonFraiRestauration" to="frai_restauration">
-            <set name="flowScope.lieuHebergement" value="flowRequestContext.getRequestParameters().lieuHebergement"></set>
-            <set name="flowScope.prixHebergement" value="flowRequestContext.getRequestParameters().prixHebergement"></set>
-            <set name="flowScope.justificatifHebergement" value="flowRequestContext.getRequestParameters().justificatifHebergement"></set>
+                  <set name="flowScope.lieuHebergement"
+                        value="flowRequestContext.getRequestParameters().lieuHebergement"></set>
+                  <set name="flowScope.prixHebergement"
+                        value="flowRequestContext.getRequestParameters().prixHebergement"></set>
+                  <set name="flowScope.justificatifHebergement"
+                        value="flowRequestContext.getRequestParameters().justificatifHebergement"></set>
             </transition>
       </view-state>
       <!-- ****************** -->
       <!-- FRAIS RESTAURATION -->
       <!-- ****************** -->
 
-                        <!-- ****** -->
-                        <!-- PAGE 1 -->
-                        <!-- ****** -->
-      <view-state id="boutonRetourfraiRestauration" view="frai_restauration">
+      <!-- ****** -->
+      <!-- PAGE 1 -->
+      <!-- ****** -->
+      <view-state id="frai_restauration" view="frai_restauration">
             <transition on="boutonCoordonneBancaire" to="coordonne_bancaire"></transition>
             <transition on="boutonFraiRestauration2" to="frai_restauration_2">
-                  <set name="flowScope.typeRestauration" value="flowRequestContext.getRequestParameters().typeRestauration"></set>
+                  <set name="flowScope.typeRestauration"
+                        value="flowRequestContext.getRequestParameters().typeRestauration"></set>
             </transition>
             <transition on="boutonRetourfraiHebergement" to="frai_hebergement"></transition>
       </view-state>
 
+      <!-- ****** -->
+      <!-- PAGE 2 -->
+      <!-- ****** -->
       <view-state id="frai_restauration_2" view="frai_restauration_2">
             <transition on="boutonFraiRestaurationRetour" to="frai_restauration"></transition>
             <transition on="boutonCoordonneBancaire" to="coordonne_bancaire">
-                  <set name="flowScope.justificatifRestauration" value="flowRequestContext.getRequestParameters().justificatifRestauration"></set>
-                  <set name="flowScope.prixRestauration" value="flowRequestContext.getRequestParameters().prixRestauration"></set>
+                  <set name="flowScope.justificatifRestauration"
+                        value="flowRequestContext.getRequestParameters().justificatifRestauration"></set>
+                  <set name="flowScope.prixRestauration"
+                        value="flowRequestContext.getRequestParameters().prixRestauration"></set>
             </transition>
       </view-state>
 
@@ -124,9 +146,15 @@
       <!-- TRANSMETTRE DECLARATION -->
       <!-- *********************** -->
       <view-state id="transmettre_declaration" view="transmettre_declaration">
-            <transition on="boutonRecapitulatif" to="recapitulatif"></transition>
+            <transition on="boutonSauvegarder" to="recapitulatif">
+                  <evaluate expression="numDossier.saveDecla(flowRequestContext)"/>
+            </transition>
       </view-state>
-      <view-state id="recapitulatif" view="recapitulatif">
 
+      <!-- *********************** -->
+      <!-- TRANSMETTRE DECLARATION -->
+      <!-- *********************** -->
+      <view-state id="recapitulatif" view="recapitulatif">
+            
       </view-state>
 </flow>
