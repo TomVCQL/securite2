@@ -120,7 +120,7 @@
         <div class="card">
             <div class="card-header ">
                 <h2 class="text-center">Votre déclaration de frais annexes</h2>
-                <b>Ref dossier: <span th:text="${numDossier}"></span></b>
+                <b>Ref dossier: <span th:text="${numeroDossier}"></span></b>
             </div>
             <div class="row">
                 <div class="col">
@@ -198,8 +198,108 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header">
-                
+            <div class="container">
+                <div class="card-header ">
+                    <h3>Etape 7: Recapitulatif de la déclaration</h3>
+                    <hr>
+                    <p class="text-center alert alert-success">Demande de déclarations envoyée avec succé</p>
+                    <div class="card custom-form">
+                        <div>
+                            <h4>Preparation Declaration</h4>
+                            <div class="d-flex justify-content-between align-items-center margin-form">
+                                <div class="margin-form">
+                                    <p>Date formation : <span th:text="${date_formation}"></span></p>
+
+                                    <p>Lieu formation : <span th:text="${lieu_formation}"></span></p>
+
+                                    <p>Intitule formation : <span th:text="${intitule}"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="card custom-form">
+                    <h4>Frais de transport</h4>
+                    <div class="d-flex justify-content-between align-items-center margin-form">
+                        <div class="margin-form">
+                            <p th:if="${moyenTransport}=='propreVehicule'">Moyen de transport : Mon propre vehicule</p>
+                            <p th:if="${moyenTransport}=='grandeLigne'">Moyen de transport : Grand Ligne (Ferry, Train,
+                                Avion)</p>
+
+
+                            <p>Date Transport : <span th:text="${dateTransport}"></span></p>
+
+                            <p>Point de départ : <span th:text="${pointDepart}"></span></p>
+
+                            <p>Destination : <span th:text="${destination}"></span></p>
+
+                            <p th:if="${moyenTransport}=='propreVehicule'">Prix de l'essence : <span
+                                    th:text="${prixTransport}+€"></span></p>
+                            <p th:if="${moyenTransport}=='grandeLigne'">Prix total du transport : <span
+                                    th:text="${prixTransport}+€"></span></p>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="card custom-form">
+                    <h4>Frais d'hébergement</h4>
+                    <div class="d-flex justify-content-between align-items-center margin-form">
+                        <div class="margin-form">
+                            <p th:if="${typeHebergement}=='gratuit'">Moyen d'hébergement : Gratuit</p>
+                            <p th:if="${typeHebergement}=='derogation'">Moyen d'hébergement : Gratuit avec dérogation
+                            </p>
+                            <p th:if="${typeHebergement}=='payant'">Moyen d'hébergement : Payant avec justificatif</p>
+
+                            <p th:if="${justificatifHebergement}=='null'">Justificatif : <span>Pas besoin de
+                                    justificatif</span></p>
+                            <p th:if="${justificatifHebergement}!='null'">Justificatif : <span
+                                    th:text="${justificatifHebergement}"></span></p>
+
+                            <p>Lieu hébergement : <span th:text="${lieuHebergement}"></span></p>
+
+                            <p th:if="${typeHebergement}=='payant'">Prix de l'hébergement : <span
+                                    th:text="${prixHebergement}+€"></span></p>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="card custom-form">
+                    <h4>Frais de restauration</h4>
+                    <div class="d-flex justify-content-between align-items-center margin-form">
+                        <div class="margin-form">
+                            <p th:if="${typeRestauration}=='sans frais'">Moyen de restauration : Gratuit</p>
+                            <p th:if="${typeRestauration}=='avec frais'">Moyen de restauration : Payant avec
+                                justificatif
+
+                            <p th:if="${justificatifRestauration}=='null'">Justificatif : <span>Pas besoin de
+                                    justificatif</span></p>
+                            <p th:if="${justificatifRestauration}!='null'">Justificatif : <span
+                                    th:text="${justificatifRestauration}"></span></p>
+
+                            <p th:if="${typeRestauration}=='avec frais'">Prix de la restauration : <span
+                                    th:text="${prixRestauration}+€"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card custom-form">
+                    <h4>Coordonnées bancaire</h4>
+                    <div class="d-flex justify-content-between align-items-center margin-form">
+                        <div class="margin-form">
+                            <p>IBAN : <span th:text="${iban}"></span></p>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="custom-form text-center">
+                    <a th:href="@{${flowExecutionUrl}+'&_eventId=fermetureWebFlow'}" type="button"
+                        class="btn btn-success">Fermer ma déclaration</a>
+                </div>
             </div>
         </div>
     </div>

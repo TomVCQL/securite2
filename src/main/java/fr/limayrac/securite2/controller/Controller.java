@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.webflow.execution.FlowExecutionContext;
 import org.springframework.webflow.execution.RequestContext;
 
 import java.io.IOException;
@@ -69,12 +70,6 @@ public class Controller {
 		return "users";
 	}
 
-	@GetMapping("/declaration")
-	public String declaration(Model model) {
-
-		return "declaration";
-	}
-
 	@Component("numDossier")
 	public class NumDossier {
 		public String genNumDossier() {
@@ -120,6 +115,7 @@ public class Controller {
 			String prixRestauration = (String) context.getFlowScope().get("prixRestauration");
 			String iban = (String) context.getFlowScope().get("iban");
 			String statut = "En attente";
+			
 			// SET
 			declaration.setStatut(statut);
 			declaration.setNumDossier(numeroDossier);
@@ -177,6 +173,10 @@ public class Controller {
 			declaration.setStatut("ACCEPTE");
 			declaRepository.save(declaration);
 		}
+
+		List<Declaration> listDeclaration = declaRepository.findByStatut("En attente");
+		model.addAttribute("listDeclaration", listDeclaration);
+
 		return "gestion";
 	}
 	
@@ -190,6 +190,9 @@ public class Controller {
 			declaration.setStatut("REFUSER");
 			declaRepository.save(declaration);
 		}
+
+		List<Declaration> listDeclaration = declaRepository.findByStatut("En attente");
+		model.addAttribute("listDeclaration", listDeclaration);
 		return "gestion";
 	}
 }

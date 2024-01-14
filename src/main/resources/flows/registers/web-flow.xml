@@ -159,20 +159,22 @@
       <!-- TRANSMETTRE DECLARATION -->
       <!-- *********************** -->
       <view-state id="transmettre_declaration" view="transmettre_declaration">
-            <transition on="boutonSauvegarder" to="recapitulatif">
-                  <evaluate expression="numDossier.saveDecla(flowRequestContext)"/>
-            </transition>
             <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
             <transition on="boutonRetourfraiTransport" to="frai_transport"></transition>
             <transition on="boutonRetourfraiHebergement" to="frai_hebergement"></transition>
             <transition on="boutonRetourCoordonneBancaire" to="coordonne_bancaire"></transition>
             <transition on="boutonRetourfraiRestauration" to="frai_restauration"></transition>
+            <transition on="boutonSauvegarder" to="recapitulatif">
+                  <evaluate expression="numDossier.saveDecla(flowRequestContext)"/>
+            </transition>
       </view-state>
 
       <!-- ************* -->
       <!-- RECAPITULATIF -->
       <!-- ************* -->
       <view-state id="recapitulatif" view="recapitulatif">
-            
+            <transition on="fermetureWebFlow" to="fermeture"></transition>
       </view-state>
+
+      <end-state id="fermeture" view="index"></end-state>
 </flow>

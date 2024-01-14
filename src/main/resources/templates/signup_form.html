@@ -49,13 +49,16 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label">role: </label>
                     <div class="col-8">
-                        <input type="text" th:field="*{role}" class="form-control" required minlength="2"
-                            maxlength="20" />
+                        <select class="form-control" th:field="*{role}" id="role" name="role" required>
+                            <option value="ROLE_ADMIN">Admin</option>
+                            <option value="ROLE_USER">User</option>
+                        </select>
                     </div>
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary">s'enregistrer</button>
                 </div>
+                <a th:href="@{/}">Accueil</a>
             </div>
         </form>
     </div>

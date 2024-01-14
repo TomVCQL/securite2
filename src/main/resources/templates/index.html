@@ -29,6 +29,8 @@
         <h5 style="color: white;" th:if="${#authorization.expression('isAuthenticated()')}"
             th:text="'Bonjour ' + ${#authentication.principal.fullName}"></h5>
         <br>
+        <a th:if="${not #authorization.expression('isAuthenticated()')}" th:href="@{/register}"
+        class="btn btn-primary d-inline-block">S'incrire sur le site</a>
         <a th:if="${not #authorization.expression('isAuthenticated()')}" th:href="@{/login}"
             class="btn btn-success d-inline-block">Login</a>
         <a th:href="@{/gestion}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"

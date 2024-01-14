@@ -180,15 +180,16 @@
                             <p th:if="${typeHebergement}=='derogation'">Moyen d'hébergement : Gratuit avec dérogation
                             </p>
                             <p th:if="${typeHebergement}=='payant'">Moyen d'hébergement : Payant avec justificatif</p>
-                        
+
                             <p th:if="${justificatifHebergement}=='null'">Justificatif : <span>Pas besoin de
                                     justificatif</span></p>
                             <p th:if="${justificatifHebergement}!='null'">Justificatif : <span
                                     th:text="${justificatifHebergement}"></span></p>
-                        
+
                             <p>Lieu hébergement : <span th:text="${lieuHebergement}"></span></p>
 
-                            <p th:if="${typeHebergement}=='payant'" >Prix de l'hébergement : <span th:text="${prixHebergement}+€"></span></p>
+                            <p th:if="${typeHebergement}=='payant'">Prix de l'hébergement : <span
+                                    th:text="${prixHebergement}+€"></span></p>
                         </div>
                         <div>
                             <a th:href="@{${flowExecutionUrl}+'&_eventId=boutonRetourfraiHebergement'}"
@@ -203,22 +204,24 @@
                     <div class="d-flex justify-content-between align-items-center margin-form">
                         <div class="margin-form">
                             <p th:if="${typeRestauration}=='sans frais'">Moyen de restauration : Gratuit</p>
-                            <p th:if="${typeRestauration}=='avec frais'">Moyen de restauration : Payant avec justificatif
+                            <p th:if="${typeRestauration}=='avec frais'">Moyen de restauration : Payant avec
+                                justificatif
 
                             <p th:if="${justificatifRestauration}=='null'">Justificatif : <span>Pas besoin de
                                     justificatif</span></p>
                             <p th:if="${justificatifRestauration}!='null'">Justificatif : <span
                                     th:text="${justificatifRestauration}"></span></p>
 
-                            <p th:if="${typeRestauration}=='avec frais'">Prix de la restauration : <span th:text="${prixRestauration}+€"></span></p>
+                            <p th:if="${typeRestauration}=='avec frais'">Prix de la restauration : <span
+                                    th:text="${prixRestauration}+€"></span></p>
                         </div>
-                    
-                    
-                    <div>
-                        <a th:href="@{${flowExecutionUrl}+'&_eventId=boutonRetourfraiRestauration'}"
-                            class="btn btn-warning">Modifier les frais de restauration</a>
+
+
+                        <div>
+                            <a th:href="@{${flowExecutionUrl}+'&_eventId=boutonRetourfraiRestauration'}"
+                                class="btn btn-warning">Modifier les frais de restauration</a>
+                        </div>
                     </div>
-                </div>
                 </div>
                 <br>
                 <div class="card custom-form">
@@ -241,7 +244,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 

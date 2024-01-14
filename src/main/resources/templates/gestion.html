@@ -74,14 +74,16 @@
                         <td style="color: green;" th:text="${declaration.statut}"></td>
                     </div>
                     <td>
-                        <form th:action="@{/accepter}">
-                            <input type="hidden" id="idDeclaration" name="idDeclaration" th:value="${declaration.id}" />
-                            <button class="btn btn-success">ACCEPTER</button>
-                        </form>
-                        <form th:action="@{/refuser}">
-                            <input type="hidden" id="idDeclaration" name="idDeclaration" th:value="${declaration.id}" />
-                            <button class="btn btn-danger">REFUSER</button>
-                        </form>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <form th:action="@{/accepter}">
+                                <input type="hidden" id="idDeclaration" name="idDeclaration" th:value="${declaration.id}" />
+                                <button class="btn btn-success">ACCEPTER</button>
+                            </form>
+                            <form th:action="@{/refuser}">
+                                <input type="hidden" id="idDeclaration" name="idDeclaration" th:value="${declaration.id}" />
+                                <button class="btn btn-danger">REFUSER</button>
+                            </form>
+                        </div>
                     </td>
                 </tr> 
             </tbody>
