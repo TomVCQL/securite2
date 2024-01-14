@@ -20,6 +20,8 @@
     <div class="text-center" style="background-color: #222;">
         <h1>page de déclaration de frais</h1>
         <br>
+        <a th:href="@{/}"
+            class="btn btn-primary d-inline-block">Accueil</a>
         <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="post"
             class="d-inline-block">
             <input class="btn btn-danger " type="submit" value="Déconnexion" />

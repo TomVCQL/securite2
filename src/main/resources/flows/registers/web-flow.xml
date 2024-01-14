@@ -55,6 +55,7 @@
                         value="flowRequestContext.getRequestParameters().prixTransport"></set>
             </transition>
             <transition on="boutonFraiTransportRetour" to="frai_transport"></transition>
+            <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
       </view-state>
 
       <!-- ****** -->
@@ -72,6 +73,7 @@
                         value="flowRequestContext.getRequestParameters().prixTransport"></set>
             </transition>
             <transition on="boutonFraiTransportRetour" to="frai_transport"></transition>
+            <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
       </view-state>
 
       <!-- ******************* -->
@@ -87,6 +89,7 @@
                         value="flowRequestContext.getRequestParameters().typeHebergement"></set>
             </transition>
             <transition on="boutonRetourfraiTransport" to="frai_transport"></transition>
+            <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
       </view-state>
 
       <!-- ****** -->
@@ -102,6 +105,8 @@
                   <set name="flowScope.justificatifHebergement"
                         value="flowRequestContext.getRequestParameters().justificatifHebergement"></set>
             </transition>
+            <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
+            <transition on="boutonRetourfraiTransport" to="frai_transport"></transition>
       </view-state>
       <!-- ****************** -->
       <!-- FRAIS RESTAURATION -->
@@ -117,6 +122,8 @@
                         value="flowRequestContext.getRequestParameters().typeRestauration"></set>
             </transition>
             <transition on="boutonRetourfraiHebergement" to="frai_hebergement"></transition>
+            <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
+            <transition on="boutonRetourfraiTransport" to="frai_transport"></transition>
       </view-state>
 
       <!-- ****** -->
@@ -130,6 +137,9 @@
                   <set name="flowScope.prixRestauration"
                         value="flowRequestContext.getRequestParameters().prixRestauration"></set>
             </transition>
+            <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
+            <transition on="boutonRetourfraiTransport" to="frai_transport"></transition>
+            <transition on="boutonRetourfraiHebergement" to="frai_hebergement"></transition>
       </view-state>
 
       <!-- ****************** -->
@@ -139,7 +149,10 @@
             <transition on="boutonTransmettreDeclaration" to="transmettre_declaration">
                   <set name="flowScope.iban" value="flowRequestContext.getRequestParameters().iban"></set>
             </transition>
-            <transition on="boutonRetourfraiRestauration" to="boutonRetourfraiRestauration"></transition>
+            <transition on="boutonRetourfraiRestauration" to="frai_restauration"></transition>
+            <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
+            <transition on="boutonRetourfraiTransport" to="frai_transport"></transition>
+            <transition on="boutonRetourfraiHebergement" to="frai_hebergement"></transition>
       </view-state>
 
       <!-- *********************** -->
@@ -149,11 +162,16 @@
             <transition on="boutonSauvegarder" to="recapitulatif">
                   <evaluate expression="numDossier.saveDecla(flowRequestContext)"/>
             </transition>
+            <transition on="boutonRetourPreparationDeclaration" to="preparation_declaration"></transition>
+            <transition on="boutonRetourfraiTransport" to="frai_transport"></transition>
+            <transition on="boutonRetourfraiHebergement" to="frai_hebergement"></transition>
+            <transition on="boutonRetourCoordonneBancaire" to="coordonne_bancaire"></transition>
+            <transition on="boutonRetourfraiRestauration" to="frai_restauration"></transition>
       </view-state>
 
-      <!-- *********************** -->
-      <!-- TRANSMETTRE DECLARATION -->
-      <!-- *********************** -->
+      <!-- ************* -->
+      <!-- RECAPITULATIF -->
+      <!-- ************* -->
       <view-state id="recapitulatif" view="recapitulatif">
             
       </view-state>

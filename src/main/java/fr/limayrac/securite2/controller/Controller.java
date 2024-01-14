@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.webflow.execution.RequestContext;
 
 import java.io.IOException;
@@ -148,6 +149,47 @@ public class Controller {
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/gestion")
 	public String gestion(Model model) {
+		List<Declaration> listDeclaration = declaRepository.findByStatut("En attente");
+		model.addAttribute("listDeclaration", listDeclaration);
+		return "gestion";
+	}
+
+	@PreAuthorize("hasRole('USER')")
+	@GetMapping("/liste_declaration")
+	public String liste_declaration(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		User user = userDetails.getUser();
+
+		List<Declaration> listDeclaration = declaRepository.findByidUser(user);
+		model.addAttribute("listDeclaration", listDeclaration);
+		return "liste_declaration";
+	}
+
+	@GetMapping("/accepter")
+	public String accepter(@RequestParam Long idDeclaration, Model model) {
+
+		Declaration declaration = declaRepository.findById(idDeclaration).orElse(null);
+
+		if (declaration != null) {
+			// Mettez à jour le statut de la déclaration ici
+			declaration.setStatut("ACCEPTE");
+			declaRepository.save(declaration);
+		}
+		return "gestion";
+	}
+	
+	@GetMapping("/refuser")
+	public String refuser(@RequestParam Long idDeclaration, Model model) {
+
+		Declaration declaration = declaRepository.findById(idDeclaration).orElse(null);
+
+		if (declaration != null) {
+			// Mettez à jour le statut de la déclaration ici
+			declaration.setStatut("REFUSER");
+			declaRepository.save(declaration);
+		}
 		return "gestion";
 	}
 }
