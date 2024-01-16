@@ -10,6 +10,7 @@ import fr.limayrac.securite2.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.webflow.execution.FlowExecutionContext;
 import org.springframework.webflow.execution.RequestContext;
 
@@ -72,6 +74,9 @@ public class Controller {
 
 	@Component("numDossier")
 	public class NumDossier {
+		@Autowired
+		private DeclarationRepository declaRepository;
+
 		public String genNumDossier() {
 			int length = 8;
 			String prefix = "D";
@@ -88,7 +93,7 @@ public class Controller {
 			return numeroDossier;
 		}
 
-		public void saveDecla(RequestContext context) {
+		public Declaration saveDecla(RequestContext context) {
 			Declaration declaration = new Declaration();
 
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -115,7 +120,7 @@ public class Controller {
 			String prixRestauration = (String) context.getFlowScope().get("prixRestauration");
 			String iban = (String) context.getFlowScope().get("iban");
 			String statut = "En attente";
-			
+
 			// SET
 			declaration.setStatut(statut);
 			declaration.setNumDossier(numeroDossier);
@@ -138,7 +143,7 @@ public class Controller {
 			declaration.setIdUser(user);
 
 			logger.info(declaration.toString());
-			declaRepository.save(declaration);
+			return (declaRepository.save(declaration));
 		}
 	}
 
@@ -164,12 +169,16 @@ public class Controller {
 	}
 
 	@GetMapping("/accepter")
-	public String accepter(@RequestParam Long idDeclaration, Model model) {
+	public ModelAndView accepter(@RequestParam Long idDeclaration, Model model) {
 
 		Declaration declaration = declaRepository.findById(idDeclaration).orElse(null);
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		User user = userDetails.getUser();
+
 		if (declaration != null) {
-			// Mettez à jour le statut de la déclaration ici
 			declaration.setStatut("ACCEPTE");
 			declaRepository.save(declaration);
 		}
@@ -177,22 +186,35 @@ public class Controller {
 		List<Declaration> listDeclaration = declaRepository.findByStatut("En attente");
 		model.addAttribute("listDeclaration", listDeclaration);
 
-		return "gestion";
+		ModelAndView modelAndView = new ModelAndView("gestion");
+    	modelAndView.addObject("declaration", declaration);
+		modelAndView.addObject("user", user);
+
+    	return modelAndView;
 	}
-	
+
 	@GetMapping("/refuser")
-	public String refuser(@RequestParam Long idDeclaration, Model model) {
+	public ModelAndView refuser(@RequestParam Long idDeclaration, Model model) {
 
 		Declaration declaration = declaRepository.findById(idDeclaration).orElse(null);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		if (declaration != null) {
-			// Mettez à jour le statut de la déclaration ici
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		User user = userDetails.getUser();
+
+		if (declaration != null){
 			declaration.setStatut("REFUSER");
 			declaRepository.save(declaration);
 		}
 
 		List<Declaration> listDeclaration = declaRepository.findByStatut("En attente");
 		model.addAttribute("listDeclaration", listDeclaration);
-		return "gestion";
+
+		ModelAndView modelAndView = new ModelAndView("gestion");
+    	modelAndView.addObject("declaration", declaration);
+		modelAndView.addObject("user", user);
+
+    	return modelAndView;
 	}
+
 }
